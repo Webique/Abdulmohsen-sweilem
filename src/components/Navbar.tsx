@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
+import logo from '@/assets/logo.png';
 
 const navItems = [
   { key: 'home', href: '#home' },
@@ -76,7 +77,7 @@ const Navbar = () => {
   "
             >
               <img
-                src="/src/assets/logo.png"
+                src={logo}
                 alt={isRTL ? 'عبدالمحسن السويلم' : 'Abdulmohsen AlSwailem'}
                 className="h-full w-auto object-contain"
               />
