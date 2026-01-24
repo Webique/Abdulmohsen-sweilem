@@ -63,6 +63,7 @@ export interface Exhibition {
     ar: string;
     en: string;
   };
+  photos?: string[]; // Optional array of photo paths
 }
 
 export interface SocialLink {
@@ -139,11 +140,11 @@ export const artworks: Artwork[] = [
   },
   {
     id: '9',
-    image: artwork9,                      
+    image: artwork9,
     title: { ar: 'النافورة التقليدية', en: 'Traditional Fountain' },
     size: '120 × 90 سم'
   },
-    {
+  {
     id: '10',
     image: artwork10,
     title: { ar: 'عمارة نجد', en: 'Najdi Architecture' },

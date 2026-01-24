@@ -13,8 +13,6 @@ const WorksSection = () => {
   const sliderItems = artworks.map((artwork, index) => ({
     id: artwork.id,
     image: artwork.image,
-    // title: artwork.title,
-    size: artwork.size,
     num: String(index + 1).padStart(2, '0'),
   }));
 

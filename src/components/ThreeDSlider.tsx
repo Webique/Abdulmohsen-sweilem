@@ -1,88 +1,56 @@
 import { useState, useEffect, useRef, useCallback, CSSProperties } from 'react';
-import { motion, useMotionValue, useSpring, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface SliderItem {
   id: string;
   image: string;
-  // title: { ar: string; en: string };
-  size: string;
   num: string;
 }
 
 interface ThreeDSliderProps {
   items: SliderItem[];
-  speedWheel?: number;
-  speedDrag?: number;
+  autoPlayInterval?: number;
   containerStyle?: CSSProperties;
-  onItemClick?: (item: SliderItem, index: number) => void;
 }
 
 const ThreeDSlider = ({
   items,
-  speedWheel = 0.02,
-  speedDrag = -0.1,
+  autoPlayInterval = 4000,
   containerStyle = {},
 }: ThreeDSliderProps) => {
-  const { i18n, t } = useTranslation();
+  const { i18n } = useTranslation();
   const isRTL = i18n.language === 'ar';
   const [activeIndex, setActiveIndex] = useState(0);
   const [selectedItem, setSelectedItem] = useState<SliderItem | null>(null);
+  const [isPaused, setIsPaused] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const progress = useMotionValue(0);
-  const smoothProgress = useSpring(progress, { damping: 30, stiffness: 200 });
-  const isDragging = useRef(false);
-  const startX = useRef(0);
-  const startProgress = useRef(0);
 
   const totalItems = items.length;
 
-  const handleWheel = useCallback((e: WheelEvent) => {
-    if (!containerRef.current?.contains(e.target as Node)) return;
-    e.preventDefault();
-    const delta = e.deltaY * speedWheel;
-    const newProgress = Math.max(0, Math.min(totalItems - 1, progress.get() + delta));
-    progress.set(newProgress);
-    setActiveIndex(Math.round(newProgress));
-  }, [progress, speedWheel, totalItems]);
+  // Auto-scroll functionality
+  useEffect(() => {
+    if (isPaused || selectedItem) return;
 
-  const handleMouseDown = useCallback((e: React.MouseEvent) => {
-    isDragging.current = true;
-    startX.current = e.clientX;
-    startProgress.current = progress.get();
-  }, [progress]);
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % totalItems);
+    }, autoPlayInterval);
 
-  const handleMouseMove = useCallback((e: MouseEvent) => {
-    if (!isDragging.current) return;
-    const delta = (e.clientX - startX.current) * speedDrag * (isRTL ? -1 : 1);
-    const newProgress = Math.max(0, Math.min(totalItems - 1, startProgress.current + delta / 100));
-    progress.set(newProgress);
-    setActiveIndex(Math.round(newProgress));
-  }, [progress, speedDrag, totalItems, isRTL]);
-
-  const handleMouseUp = useCallback(() => {
-    isDragging.current = false;
-  }, []);
-
-  const handleTouchStart = useCallback((e: React.TouchEvent) => {
-    isDragging.current = true;
-    startX.current = e.touches[0].clientX;
-    startProgress.current = progress.get();
-  }, [progress]);
-
-  const handleTouchMove = useCallback((e: TouchEvent) => {
-    if (!isDragging.current) return;
-    const delta = (e.touches[0].clientX - startX.current) * speedDrag * (isRTL ? -1 : 1);
-    const newProgress = Math.max(0, Math.min(totalItems - 1, startProgress.current + delta / 100));
-    progress.set(newProgress);
-    setActiveIndex(Math.round(newProgress));
-  }, [progress, speedDrag, totalItems, isRTL]);
+    return () => clearInterval(interval);
+  }, [autoPlayInterval, totalItems, isPaused, selectedItem]);
 
   const goToSlide = (index: number) => {
     const clampedIndex = Math.max(0, Math.min(totalItems - 1, index));
-    progress.set(clampedIndex);
     setActiveIndex(clampedIndex);
+  };
+
+  const goNext = () => {
+    setActiveIndex((prev) => (prev + 1) % totalItems);
+  };
+
+  const goPrev = () => {
+    setActiveIndex((prev) => (prev - 1 + totalItems) % totalItems);
   };
 
   const handleItemClick = (item: SliderItem, index: number) => {
@@ -93,36 +61,27 @@ const ThreeDSlider = ({
     }
   };
 
-  useEffect(() => {
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseup', handleMouseUp);
-    window.addEventListener('touchmove', handleTouchMove);
-    window.addEventListener('touchend', handleMouseUp);
-    window.addEventListener('wheel', handleWheel, { passive: false });
-
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseup', handleMouseUp);
-      window.removeEventListener('touchmove', handleTouchMove);
-      window.removeEventListener('touchend', handleMouseUp);
-      window.removeEventListener('wheel', handleWheel);
-    };
-  }, [handleMouseMove, handleMouseUp, handleTouchMove, handleWheel]);
-
   return (
     <>
       <div
         ref={containerRef}
-        className="relative w-full h-[500px] md:h-[600px] overflow-hidden cursor-grab active:cursor-grabbing select-none"
+        className="relative w-full h-[500px] md:h-[600px] overflow-hidden select-none"
         style={containerStyle}
-        onMouseDown={handleMouseDown}
-        onTouchStart={handleTouchStart}
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
       >
         <div className="absolute inset-0 flex items-center justify-center perspective-[1500px]">
           {items.map((item, index) => {
-            const offset = index - activeIndex;
+            // Calculate offset with wrap-around for smooth infinite feel
+            let offset = index - activeIndex;
+
+            // Adjust for wrap-around
+            if (offset > totalItems / 2) offset -= totalItems;
+            if (offset < -totalItems / 2) offset += totalItems;
+
             const isActive = index === activeIndex;
-            
+            const absOffset = Math.abs(offset);
+
             return (
               <motion.div
                 key={item.id}
@@ -130,10 +89,10 @@ const ThreeDSlider = ({
                 initial={false}
                 animate={{
                   x: offset * (isRTL ? -220 : 220),
-                  z: isActive ? 100 : -Math.abs(offset) * 100,
+                  z: isActive ? 100 : -absOffset * 100,
                   rotateY: offset * (isRTL ? 15 : -15),
-                  scale: isActive ? 1 : 0.85 - Math.abs(offset) * 0.1,
-                  opacity: Math.abs(offset) > 3 ? 0 : 1 - Math.abs(offset) * 0.15,
+                  scale: isActive ? 1 : 0.85 - absOffset * 0.1,
+                  opacity: absOffset > 3 ? 0 : 1 - absOffset * 0.15,
                 }}
                 transition={{
                   type: 'spring',
@@ -142,34 +101,22 @@ const ThreeDSlider = ({
                 }}
                 style={{
                   transformStyle: 'preserve-3d',
-                  zIndex: totalItems - Math.abs(offset),
+                  zIndex: totalItems - absOffset,
                 }}
                 onClick={() => handleItemClick(item, index)}
               >
-                <div 
-                  className={`relative w-[260px] md:w-[320px] h-[360px] md:h-[420px] rounded-2xl overflow-hidden shadow-medium transition-shadow duration-300 ${
-                    isActive ? 'ring-4 ring-secondary/50 shadow-gold' : ''
-                  }`}
+                <div
+                  className={`relative w-[260px] md:w-[320px] h-[360px] md:h-[420px] overflow-hidden shadow-medium transition-shadow duration-300 ${isActive ? 'ring-4 ring-secondary/50 shadow-gold' : ''
+                    }`}
                 >
                   <img
                     src={item.image}
-                    alt="Artwork"
+                    alt={`Artwork ${item.num}`}
                     className="w-full h-full object-cover"
                     draggable={false}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 text-white">
-                    <motion.div 
-                      className="text-secondary font-bold text-sm mb-1"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: isActive ? 1 : 0.7 }}
-                    >
-                      {item.num}
-                    </motion.div>
-                    <p className="text-xs md:text-sm text-white/80 mt-1">
-                      {t('gallery.size')}: {item.size}
-                    </p>
-                  </div>
+                  {/* Gradient overlay - no size display */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
                 </div>
               </motion.div>
             );
@@ -178,36 +125,34 @@ const ThreeDSlider = ({
 
         {/* Navigation arrows */}
         <button
-          onClick={() => goToSlide(activeIndex - 1)}
-          className={`absolute top-1/2 -translate-y-1/2 ${isRTL ? 'right-4' : 'left-4'} p-3 bg-card/80 backdrop-blur-sm rounded-full shadow-soft hover:bg-card transition-colors disabled:opacity-30`}
-          disabled={activeIndex === 0}
+          onClick={goPrev}
+          className={`absolute top-1/2 -translate-y-1/2 ${isRTL ? 'right-4' : 'left-4'} p-3 bg-card/80 backdrop-blur-sm shadow-soft hover:bg-card transition-colors`}
         >
           <ChevronLeft size={24} className={isRTL ? 'rotate-180' : ''} />
         </button>
         <button
-          onClick={() => goToSlide(activeIndex + 1)}
-          className={`absolute top-1/2 -translate-y-1/2 ${isRTL ? 'left-4' : 'right-4'} p-3 bg-card/80 backdrop-blur-sm rounded-full shadow-soft hover:bg-card transition-colors disabled:opacity-30`}
-          disabled={activeIndex === totalItems - 1}
+          onClick={goNext}
+          className={`absolute top-1/2 -translate-y-1/2 ${isRTL ? 'left-4' : 'right-4'} p-3 bg-card/80 backdrop-blur-sm shadow-soft hover:bg-card transition-colors`}
         >
           <ChevronRight size={24} className={isRTL ? 'rotate-180' : ''} />
         </button>
+
         {/* Progress dots */}
         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
           {items.map((_, index) => (
             <button
               key={index}
               onClick={() => goToSlide(index)}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                index === activeIndex 
-                  ? 'bg-secondary w-6' 
+              className={`w-2 h-2 transition-all duration-300 ${index === activeIndex
+                  ? 'bg-secondary w-6'
                   : 'bg-muted-foreground/30 hover:bg-muted-foreground/50'
-              }`}
+                }`}
             />
           ))}
         </div>
       </div>
 
-      {/* Lightbox Modal */}
+      {/* Lightbox Modal - no size display */}
       <AnimatePresence>
         {selectedItem && (
           <motion.div
@@ -233,14 +178,9 @@ const ThreeDSlider = ({
               </button>
               <img
                 src={selectedItem.image}
-                alt="Artwork"
-                className="w-full h-auto max-h-[80vh] object-contain rounded-lg"
+                alt={`Artwork ${selectedItem.num}`}
+                className="w-full h-auto max-h-[85vh] object-contain"
               />
-              <div className="mt-4 text-center text-white">
-                <p className="text-white/70 text-sm mt-2">
-                  {t('gallery.size')}: {selectedItem.size}
-                </p>
-              </div>
             </motion.div>
           </motion.div>
         )}

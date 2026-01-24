@@ -84,12 +84,12 @@
     --border: 220 15% 22%;
     --input: 220 15% 22%;
     --ring: 43 74% 55%;
-    
+
     /* Dark mode shadows */
     --shadow-soft: 0 4px 20px -2px hsl(0 0% 0% / 0.3);
     --shadow-medium: 0 8px 30px -4px hsl(0 0% 0% / 0.4);
     --shadow-gold: 0 4px 20px -2px hsl(43 74% 49% / 0.35);
-    
+
     /* Dark mode gradient */
     --gradient-paper: linear-gradient(180deg, hsl(220 20% 8%) 0%, hsl(220 20% 10%) 100%);
   }
@@ -131,6 +131,7 @@
 }
 
 @layer components {
+
   /* Paper texture overlay */
   .paper-texture {
     position: relative;
@@ -162,7 +163,7 @@
     border-radius: 2px;
   }
 
-  /* Elegant card style */
+  /* Elegant card style - rounded */
   .elegant-card {
     @apply bg-card rounded-xl;
     box-shadow: var(--shadow-soft);
@@ -606,6 +607,7 @@
 }
 
 @layer utilities {
+
   /* Animation utilities */
   .animate-fade-up {
     animation: fadeUp 0.6s ease-out forwards;
@@ -641,6 +643,7 @@
       opacity: 0;
       transform: translateY(30px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);
@@ -651,6 +654,7 @@
     from {
       opacity: 0;
     }
+
     to {
       opacity: 1;
     }
@@ -661,6 +665,7 @@
       opacity: 0;
       transform: scale(0.95);
     }
+
     to {
       opacity: 1;
       transform: scale(1);
@@ -668,9 +673,12 @@
   }
 
   @keyframes float {
-    0%, 100% {
+
+    0%,
+    100% {
       transform: translateY(0);
     }
+
     50% {
       transform: translateY(-20px);
     }
@@ -680,6 +688,7 @@
     0% {
       background-position: -200% 0;
     }
+
     100% {
       background-position: 200% 0;
     }
@@ -689,15 +698,19 @@
     from {
       box-shadow: 0 0 10px hsl(43 74% 49% / 0.3);
     }
+
     to {
       box-shadow: 0 0 25px hsl(43 74% 49% / 0.6);
     }
   }
 
   @keyframes bounceSubtle {
-    0%, 100% {
+
+    0%,
+    100% {
       transform: translateY(0);
     }
+
     50% {
       transform: translateY(-5px);
     }
@@ -707,19 +720,24 @@
     0% {
       transform: translate(0, 0);
     }
+
     50% {
       transform: translate(-2%, 2%);
     }
+
     100% {
       transform: translate(0, 0);
     }
   }
 
   @keyframes pulseSoft {
-    0%, 100% {
+
+    0%,
+    100% {
       opacity: 0.6;
       transform: scale(1);
     }
+
     50% {
       opacity: 1;
       transform: scale(1.08);
@@ -727,10 +745,13 @@
   }
 
   @keyframes sparkleFloat {
-    0%, 100% {
+
+    0%,
+    100% {
       opacity: 0.25;
       transform: translateY(0);
     }
+
     50% {
       opacity: 0.5;
       transform: translateY(-8px);
@@ -742,10 +763,12 @@
       transform: translateX(-15%);
       opacity: 0.15;
     }
+
     50% {
       transform: translateX(0);
       opacity: 0.4;
     }
+
     100% {
       transform: translateX(15%);
       opacity: 0.2;
@@ -757,13 +780,16 @@
       transform: translateX(-60%);
       opacity: 0;
     }
+
     40% {
       opacity: 0.35;
     }
+
     70% {
       transform: translateX(60%);
       opacity: 0.5;
     }
+
     100% {
       transform: translateX(140%);
       opacity: 0;
@@ -775,13 +801,16 @@
       transform: translateX(-60%);
       opacity: 0;
     }
+
     35% {
       opacity: 0.6;
     }
+
     60% {
       transform: translateX(140%);
       opacity: 0.7;
     }
+
     100% {
       transform: translateX(220%);
       opacity: 0;
@@ -807,14 +836,31 @@
   }
 
   /* Stagger children animations */
-  .stagger-children > * {
+  .stagger-children>* {
     opacity: 0;
   }
 
-  .stagger-children.animate > *:nth-child(1) { animation: fadeUp 0.5s ease-out 0.1s forwards; }
-  .stagger-children.animate > *:nth-child(2) { animation: fadeUp 0.5s ease-out 0.2s forwards; }
-  .stagger-children.animate > *:nth-child(3) { animation: fadeUp 0.5s ease-out 0.3s forwards; }
-  .stagger-children.animate > *:nth-child(4) { animation: fadeUp 0.5s ease-out 0.4s forwards; }
-  .stagger-children.animate > *:nth-child(5) { animation: fadeUp 0.5s ease-out 0.5s forwards; }
-  .stagger-children.animate > *:nth-child(6) { animation: fadeUp 0.5s ease-out 0.6s forwards; }
+  .stagger-children.animate>*:nth-child(1) {
+    animation: fadeUp 0.5s ease-out 0.1s forwards;
+  }
+
+  .stagger-children.animate>*:nth-child(2) {
+    animation: fadeUp 0.5s ease-out 0.2s forwards;
+  }
+
+  .stagger-children.animate>*:nth-child(3) {
+    animation: fadeUp 0.5s ease-out 0.3s forwards;
+  }
+
+  .stagger-children.animate>*:nth-child(4) {
+    animation: fadeUp 0.5s ease-out 0.4s forwards;
+  }
+
+  .stagger-children.animate>*:nth-child(5) {
+    animation: fadeUp 0.5s ease-out 0.5s forwards;
+  }
+
+  .stagger-children.animate>*:nth-child(6) {
+    animation: fadeUp 0.5s ease-out 0.6s forwards;
+  }
 }

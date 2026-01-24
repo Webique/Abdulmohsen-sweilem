@@ -34,6 +34,8 @@ const Navbar = () => {
     localStorage.setItem('language', newLang);
     document.documentElement.dir = newLang === 'ar' ? 'rtl' : 'ltr';
     document.documentElement.lang = newLang;
+    // Scroll to top when language changes
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const scrollToSection = (href: string) => {
