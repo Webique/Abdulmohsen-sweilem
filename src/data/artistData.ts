@@ -1,50 +1,4 @@
-// Import artwork images
-import artwork1 from '@/assets/artwork1.webp';
-import artwork2 from '@/assets/artwork2.webp';
-import artwork3 from '@/assets/artwork3.webp';
-import artwork4 from '@/assets/artwork4.webp';
-import artwork5 from '@/assets/artwork5.webp';
-import artwork6 from '@/assets/artwork6.webp';
-import artwork7 from '@/assets/artwork7.webp';
-import artwork8 from '@/assets/artwork8.webp';
-import artwork9 from '@/assets/artwork9.webp';
-import artwork10 from '@/assets/artwork10.webp';
-import artwork11 from '@/assets/artwork11.webp';
-import artwork12 from '@/assets/artwork12.webp';
-import artwork13 from '@/assets/artwork13.webp';
-import artwork14 from '@/assets/artwork14.webp';
-import artwork15 from '@/assets/artwork15.webp';
-import artwork16 from '@/assets/artwork16.webp';
-import artwork17 from '@/assets/artwork17.webp';
-import artwork18 from '@/assets/artwork18.webp';
-import artwork19 from '@/assets/artwork19.webp';
-import artwork20 from '@/assets/artwork20.webp';
-import artwork21 from '@/assets/artwork21.webp';
-import artwork22 from '@/assets/artwork22.webp';
-import artwork23 from '@/assets/artwork23.webp';
-import artwork24 from '@/assets/artwork24.jpg';
-import artwork25 from '@/assets/artwork25.webp';
-
-
-// Import collected works images
-import collected1 from '@/assets/collected1.webp';
-import collected2 from '@/assets/collected2.webp';
-import collected3 from '@/assets/collected3.webp';
-import collected4 from '@/assets/collected4.webp';
-import collected5 from '@/assets/collected5.jpg';
-import collected6 from '@/assets/collected6.webp';
-import collected7 from '@/assets/collected7.webp';
-import collected8 from '@/assets/collected8.webp';
-import collected9 from '@/assets/collected9.webp';
-import collected10 from '@/assets/collected10.webp';
-import collected11 from '@/assets/collected11.webp';
-
-// Import personal photos
-import photo1 from '@/assets/photo1.jpg';
-import photo2 from '@/assets/photo2.webp';
-import photo3 from '@/assets/photo3.webp';
-import photo4 from '@/assets/photo4.jpg';
-import photo5 from '@/assets/photo5.jpg';
+// No imports - use public paths for lazy loading
 
 export interface Artwork {
   id: string;
@@ -63,7 +17,7 @@ export interface Exhibition {
     ar: string;
     en: string;
   };
-  photos?: string[]; // Optional array of photo paths
+  photos?: string[];
 }
 
 export interface SocialLink {
@@ -88,237 +42,57 @@ export const socialLinks: SocialLink[] = [
 
 export const contactEmail = 'snam20@gmail.com';
 
-// Artworks gallery - Add your artwork images here
+// Artworks gallery - using public paths for lazy loading
 export const artworks: Artwork[] = [
-  {
-    id: '1',
-    image: artwork1,
-    title: { ar: 'غروب الصحراء', en: 'Desert Sunset' },
-    size: '100 × 120 سم'
-  },
-  {
-    id: '2',
-    image: artwork2,
-    title: { ar: 'تجريد أزرق وذهبي', en: 'Blue & Gold Abstract' },
-    size: '120 × 90 سم'
-  },
-  {
-    id: '3',
-    image: artwork3,
-    title: { ar: 'الباب النجدي', en: 'Najdi Doorway' },
-    size: '120 × 90 سم'
-  },
-  {
-    id: '4',
-    image: artwork4,
-    title: { ar: 'دلة القهوة', en: 'Arabic Coffee Pot' },
-    size: '120 × 90 سم'
-  },
-  {
-    id: '5',
-    image: artwork5,
-    title: { ar: 'واحة النخيل', en: 'Palm Oasis' },
-    size: '220 × 190 سم'
-  },
-  {
-    id: '6',
-    image: artwork6,
-    title: { ar: 'زخارف إسلامية', en: 'Islamic Patterns' },
-    size: '200 × 65 سم'
-  },
-  {
-    id: '7',
-    image: artwork7,
-    title: { ar: 'غروب الصحراء ٢', en: 'Desert Sunset 2' },
-    size: '100 × 120 سم'
-  },
-  {
-    id: '8',
-    image: artwork8,
-    title: { ar: 'تجريد أحمر وذهبي', en: 'Red & Gold Abstract' },
-    size: '120 × 90 سم'
-  },
-  {
-    id: '9',
-    image: artwork9,
-    title: { ar: 'النافورة التقليدية', en: 'Traditional Fountain' },
-    size: '120 × 90 سم'
-  },
-  {
-    id: '10',
-    image: artwork10,
-    title: { ar: 'عمارة نجد', en: 'Najdi Architecture' },
-    size: '100 × 100 سم'
-  },
-  {
-    id: '11',
-    image: artwork11,
-    title: { ar: 'تكوين تراثي', en: 'Heritage Composition' },
-    size: '120 × 120 سم'
-  },
-  {
-    id: '12',
-    image: artwork12,
-    title: { ar: 'تجريد رملي', en: 'Sand Abstract' },
-    size: '100 × 100 سم'
-  },
-  {
-    id: '13',
-    image: artwork13,
-    title: { ar: 'بوابة قديمة', en: 'Ancient Gate' },
-    size: '100 × 80 سم'
-  },
-  {
-    id: '14',
-    image: artwork14,
-    title: { ar: 'ثلاثية المكان', en: 'Triptych of Place' },
-    size: '٣ قطع: 300 × 120 سم لكل قطعة'
-  },
-  {
-    id: '15',
-    image: artwork15,
-    title: { ar: 'تجريد معماري', en: 'Architectural Abstract' },
-    size: '100 × 100 سم'
-  },
-  {
-    id: '16',
-    image: artwork16,
-    title: { ar: 'تفاصيل نجدية', en: 'Najdi Details' },
-    size: '100 × 100 سم'
-  },
-  {
-    id: '17',
-    image: artwork17,
-    title: { ar: 'إيقاع اللون', en: 'Rhythm of Color' },
-    size: '100 × 100 سم'
-  },
-  {
-    id: '18',
-    image: artwork18,
-    title: { ar: 'صدى التراث', en: 'Echoes of Heritage' },
-    size: '100 × 120 سم'
-  },
-  {
-    id: '19',
-    image: artwork19,
-    title: { ar: 'تجريد دافئ', en: 'Warm Abstract' },
-    size: '160 × 120 سم'
-  },
-  {
-    id: '20',
-    image: artwork20,
-    title: { ar: 'ممرات قديمة', en: 'Old Passages' },
-    size: '90 × 60 سم'
-  },
-  {
-    id: '21',
-    image: artwork21,
-    title: { ar: 'روح المكان', en: 'Spirit of Place' },
-    size: '100 × 100 سم'
-  },
-  {
-    id: '22',
-    image: artwork22,
-    title: { ar: 'تكوين صحراوي', en: 'Desert Composition' },
-    size: '—'
-  },
-  {
-    id: '23',
-    image: artwork23,
-    title: { ar: 'إضاءة تراثية', en: 'Heritage Light' },
-    size: '100 × 100 سم'
-  },
-  {
-    id: '24',
-    image: artwork24,
-    title: { ar: 'توازن بصري', en: 'Visual Balance' },
-    size: '120 × 120 سم'
-  },
-  {
-    id: '25',
-    image: artwork25,
-    title: { ar: 'ذاكرة المكان', en: 'Memory of Place' },
-    size: '120 × 100 سم'
-  }
+  { id: '1', image: '/images/artworks/artwork1.webp', title: { ar: 'غروب الصحراء', en: 'Desert Sunset' }, size: '100 × 120 سم' },
+  { id: '2', image: '/images/artworks/artwork2.webp', title: { ar: 'تجريد أزرق وذهبي', en: 'Blue & Gold Abstract' }, size: '120 × 90 سم' },
+  { id: '3', image: '/images/artworks/artwork3.webp', title: { ar: 'الباب النجدي', en: 'Najdi Doorway' }, size: '120 × 90 سم' },
+  { id: '4', image: '/images/artworks/artwork4.webp', title: { ar: 'دلة القهوة', en: 'Arabic Coffee Pot' }, size: '120 × 90 سم' },
+  { id: '5', image: '/images/artworks/artwork5.webp', title: { ar: 'واحة النخيل', en: 'Palm Oasis' }, size: '220 × 190 سم' },
+  { id: '6', image: '/images/artworks/artwork6.webp', title: { ar: 'زخارف إسلامية', en: 'Islamic Patterns' }, size: '200 × 65 سم' },
+  { id: '7', image: '/images/artworks/artwork7.webp', title: { ar: 'غروب الصحراء ٢', en: 'Desert Sunset 2' }, size: '100 × 120 سم' },
+  { id: '8', image: '/images/artworks/artwork8.webp', title: { ar: 'تجريد أحمر وذهبي', en: 'Red & Gold Abstract' }, size: '120 × 90 سم' },
+  { id: '9', image: '/images/artworks/artwork9.webp', title: { ar: 'النافورة التقليدية', en: 'Traditional Fountain' }, size: '120 × 90 سم' },
+  { id: '10', image: '/images/artworks/artwork10.webp', title: { ar: 'عمارة نجد', en: 'Najdi Architecture' }, size: '100 × 100 سم' },
+  { id: '11', image: '/images/artworks/artwork11.webp', title: { ar: 'تكوين تراثي', en: 'Heritage Composition' }, size: '120 × 120 سم' },
+  { id: '12', image: '/images/artworks/artwork12.webp', title: { ar: 'تجريد رملي', en: 'Sand Abstract' }, size: '100 × 100 سم' },
+  { id: '13', image: '/images/artworks/artwork13.webp', title: { ar: 'بوابة قديمة', en: 'Ancient Gate' }, size: '100 × 80 سم' },
+  { id: '14', image: '/images/artworks/artwork14.webp', title: { ar: 'ثلاثية المكان', en: 'Triptych of Place' }, size: '٣ قطع: 300 × 120 سم لكل قطعة' },
+  { id: '15', image: '/images/artworks/artwork15.webp', title: { ar: 'تجريد معماري', en: 'Architectural Abstract' }, size: '100 × 100 سم' },
+  { id: '16', image: '/images/artworks/artwork16.webp', title: { ar: 'تفاصيل نجدية', en: 'Najdi Details' }, size: '100 × 100 سم' },
+  { id: '17', image: '/images/artworks/artwork17.webp', title: { ar: 'إيقاع اللون', en: 'Rhythm of Color' }, size: '100 × 100 سم' },
+  { id: '18', image: '/images/artworks/artwork18.webp', title: { ar: 'صدى التراث', en: 'Echoes of Heritage' }, size: '100 × 120 سم' },
+  { id: '19', image: '/images/artworks/artwork19.webp', title: { ar: 'تجريد دافئ', en: 'Warm Abstract' }, size: '160 × 120 سم' },
+  { id: '20', image: '/images/artworks/artwork20.webp', title: { ar: 'ممرات قديمة', en: 'Old Passages' }, size: '90 × 60 سم' },
+  { id: '21', image: '/images/artworks/artwork21.webp', title: { ar: 'روح المكان', en: 'Spirit of Place' }, size: '100 × 100 سم' },
+  { id: '22', image: '/images/artworks/artwork22.webp', title: { ar: 'تكوين صحراوي', en: 'Desert Composition' }, size: '—' },
+  { id: '23', image: '/images/artworks/artwork23.webp', title: { ar: 'إضاءة تراثية', en: 'Heritage Light' }, size: '100 × 100 سم' },
+  { id: '24', image: '/images/artworks/artwork24.webp', title: { ar: 'توازن بصري', en: 'Visual Balance' }, size: '120 × 120 سم' },
+  { id: '25', image: '/images/artworks/artwork25.webp', title: { ar: 'ذاكرة المكان', en: 'Memory of Place' }, size: '120 × 100 سم' }
 ];
 
-// Collected works gallery - Add collected artwork images here
+// Collected works gallery
 export const collectedWorks: Artwork[] = [
-  {
-    id: '1',
-    image: collected1,
-    // title: { ar: 'الحصان العربي', en: 'Arabian Horse' },
-    // size: '60 × 80 سم'
-  },
-  {
-    id: '2',
-    image: collected2,
-    // title: { ar: 'خط عربي', en: 'Arabic Calligraphy' },
-    // size: '50 × 70 سم'
-  },
-  {
-    id: '3',
-    image: collected3,
-    // title: { ar: 'حي الرياض القديم', en: 'Old Riyadh Neighborhood' },
-    // size: '45 × 65 سم'
-  },
-  {
-    id: '4',
-    image: collected4,
-    // title: { ar: 'الصقر', en: 'The Falcon' },
-    // size: '70 × 90 سم'
-  },
-  {
-    id: '5',
-    image: collected5,
-    // title: { ar: 'الحصان العربي', en: 'Arabian Horse' },
-    // size: '60 × 80 سم'
-  },
-  {
-    id: '6',
-    image: collected6,
-    // title: { ar: 'خط عربي', en: 'Arabic Calligraphy' },
-    // size: '50 × 70 سم'
-  },
-  {
-    id: '7',
-    image: collected7,
-    // title: { ar: 'حي الرياض القديم', en: 'Old Riyadh Neighborhood' },
-    // size: '45 × 65 سم'
-  },
-  {
-    id: '8',
-    image: collected8,
-    // title: { ar: 'الصقر', en: 'The Falcon' },
-    // size: '70 × 90 سم'
-  },
-  {
-    id: '9',
-    image: collected9,
-    // title: { ar: 'الحصان العربي', en: 'Arabian Horse' },
-    // size: '60 × 80 سم'
-  },
-  {
-    id: '10',
-    image: collected10,
-    // title: { ar: 'خط عربي', en: 'Arabic Calligraphy' },
-    // size: '50 × 70 سم'
-  },
-  {
-    id: '11',
-    image: collected11,
-    // title: { ar: 'حي الرياض القديم', en: 'Old Riyadh Neighborhood' },
-    // size: '45 × 65 سم'
-  }
+  { id: '1', image: '/images/collected/collected1.webp' },
+  { id: '2', image: '/images/collected/collected2.webp' },
+  { id: '3', image: '/images/collected/collected3.webp' },
+  { id: '4', image: '/images/collected/collected4.webp' },
+  { id: '5', image: '/images/collected/collected5.webp' },
+  { id: '6', image: '/images/collected/collected6.webp' },
+  { id: '7', image: '/images/collected/collected7.webp' },
+  { id: '8', image: '/images/collected/collected8.webp' },
+  { id: '9', image: '/images/collected/collected9.webp' },
+  { id: '10', image: '/images/collected/collected10.webp' },
+  { id: '11', image: '/images/collected/collected11.webp' }
 ];
 
-// Personal photos - Add personal/event photos here
+// Personal photos
 export const personalPhotos: string[] = [
-  photo1,
-  photo2,
-  photo3,
-  photo4,
-  photo5
+  '/images/photos/photo1.webp',
+  '/images/photos/photo2.webp',
+  '/images/photos/photo3.webp',
+  '/images/photos/photo4.webp',
+  '/images/photos/photo5.webp'
 ];
 
 // Exhibitions and participations timeline
@@ -333,9 +107,30 @@ export const exhibitions: Exhibition[] = [
   { id: '8', year: '2012', title: { ar: 'معرض طاقات الفردي', en: 'Taqat Solo Exhibition' } },
   { id: '9', year: '2014', title: { ar: 'معرض الفن السعودي - دبي', en: 'Saudi Art Exhibition - Dubai' } },
   { id: '10', year: '2015', title: { ar: 'ملتقى الفنانين - الدمام', en: 'Artists Forum - Dammam' } },
-  { id: '11', year: '2017', title: { ar: 'معرض جماعي دولي', en: 'International Group Exhibition' } },
-  { id: '12', year: '2019', title: { ar: 'معرض الفن المعاصر', en: 'Contemporary Art Exhibition' } },
-  { id: '13', year: '2021', title: { ar: 'معرض افتراضي - كوفيد', en: 'Virtual Exhibition - COVID' } },
-  { id: '14', year: '2023', title: { ar: 'معرض جسفت الكبير', en: 'JASFT Grand Exhibition' } },
-  { id: '15', year: '2025', title: { ar: 'ملتقى الزلفي ٢٠٢٥م', en: 'Al Zulfi Arts Gathering — 2025' } }
+  {
+    id: '11',
+    year: '2017',
+    title: { ar: 'معرض مسك - أبها', en: 'Misk Exhibition - Abha' },
+    photos: [
+      '/images/exhibitions/misk-abha-01.webp',
+      '/images/exhibitions/misk-abha-02.webp',
+      '/images/exhibitions/misk-abha-03.webp',
+      '/images/exhibitions/misk-abha-04.webp'
+    ]
+  },
+  {
+    id: '12',
+    year: '2017',
+    title: { ar: 'معرض مسك - الرياض', en: 'Misk Exhibition - Riyadh' },
+    photos: [
+      '/images/exhibitions/misk-riyadh-01.webp',
+      '/images/exhibitions/misk-riyadh-02.webp',
+      '/images/exhibitions/misk-riyadh-03.webp',
+      '/images/exhibitions/misk-riyadh-04.webp'
+    ]
+  },
+  { id: '13', year: '2019', title: { ar: 'معرض الفن المعاصر', en: 'Contemporary Art Exhibition' } },
+  { id: '14', year: '2021', title: { ar: 'معرض افتراضي - كوفيد', en: 'Virtual Exhibition - COVID' } },
+  { id: '15', year: '2023', title: { ar: 'معرض جسفت الكبير', en: 'JASFT Grand Exhibition' } },
+  { id: '16', year: '2025', title: { ar: 'ملتقى الزلفي ٢٠٢٥م', en: 'Al Zulfi Arts Gathering — 2025' } }
 ];

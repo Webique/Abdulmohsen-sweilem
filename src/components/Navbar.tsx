@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
-import logo from '@/assets/logo.png';
+import logo from '@/assets/logo.webp';
 
 const navItems = [
   { key: 'home', href: '#home' },
@@ -31,12 +31,9 @@ const Navbar = () => {
 
   const toggleLanguage = () => {
     const newLang = i18n.language === 'ar' ? 'en' : 'ar';
-    i18n.changeLanguage(newLang);
     localStorage.setItem('language', newLang);
-    document.documentElement.dir = newLang === 'ar' ? 'rtl' : 'ltr';
-    document.documentElement.lang = newLang;
-    // Scroll to top when language changes
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Full page reload to apply new language
+    window.location.reload();
   };
 
   const scrollToSection = (href: string) => {

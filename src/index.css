@@ -822,6 +822,14 @@
     perspective: 1500px;
   }
 
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
   /* Shadow utilities */
   .shadow-soft {
     box-shadow: var(--shadow-soft);
@@ -833,6 +841,15 @@
 
   .shadow-gold {
     box-shadow: var(--shadow-gold);
+  }
+
+  /* Grab cursor */
+  .cursor-grab {
+    cursor: grab;
+  }
+
+  .cursor-grab:active {
+    cursor: grabbing;
   }
 
   /* Stagger children animations */
@@ -863,4 +880,103 @@
   .stagger-children.animate>*:nth-child(6) {
     animation: fadeUp 0.5s ease-out 0.6s forwards;
   }
+
+  /* Smooth page transitions */
+  .page-transition-enter {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .page-transition-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .page-transition-exit {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .page-transition-exit-active {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+}
+
+/* ===========================================
+   PERFORMANCE OPTIMIZATIONS (from AQCM)
+   =========================================== */
+
+/* Accessibility: Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Reduced motion class for JavaScript control */
+.reduce-motion *,
+.reduce-motion *::before,
+.reduce-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+.reduce-motion {
+  scroll-behavior: auto !important;
+}
+
+/* Performance: GPU acceleration for animated elements */
+.will-animate {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Performance: Optimize text rendering */
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Mobile: Remove tap highlight */
+button,
+textarea,
+input,
+select,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Optimized shadows (GPU-friendly) */
+.shadow-elegant {
+  box-shadow: 0 4px 20px -8px rgba(0, 0, 0, 0.12);
+}
+
+/* Glass morphism */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }

@@ -39,7 +39,7 @@ const AnimatedText = ({ text, className, delay = 0 }: { text: string; className?
 const HeroSection = () => {
   const { t, i18n } = useTranslation();
   const isRTL = i18n.language === 'ar';
-  const portraitSrc = '/images/artist.jpeg';
+  const portraitSrc = '/images/artist.webp';
   const sectionRef = useRef(null);
 
   // Parallax effect

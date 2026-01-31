@@ -82,6 +82,10 @@ const ThreeDSlider = ({
             const isActive = index === activeIndex;
             const absOffset = Math.abs(offset);
 
+            // Only render items within visible range (performance optimization)
+            // Reduced from 3 to 2 for better fullscreen performance (5 items max instead of 7)
+            if (absOffset > 2) return null;
+
             return (
               <motion.div
                 key={item.id}
@@ -92,16 +96,18 @@ const ThreeDSlider = ({
                   z: isActive ? 100 : -absOffset * 100,
                   rotateY: offset * (isRTL ? 15 : -15),
                   scale: isActive ? 1 : 0.85 - absOffset * 0.1,
-                  opacity: absOffset > 3 ? 0 : 1 - absOffset * 0.15,
+                  opacity: 1 - absOffset * 0.15,
                 }}
                 transition={{
-                  type: 'spring',
-                  stiffness: 200,
-                  damping: 25,
+                  type: 'tween',
+                  duration: 0.4,
+                  ease: 'easeOut',
                 }}
                 style={{
                   transformStyle: 'preserve-3d',
                   zIndex: totalItems - absOffset,
+                  willChange: 'transform, opacity',
+                  backfaceVisibility: 'hidden',
                 }}
                 onClick={() => handleItemClick(item, index)}
               >
@@ -114,6 +120,8 @@ const ThreeDSlider = ({
                     alt={`Artwork ${item.num}`}
                     className="w-full h-full object-cover"
                     draggable={false}
+                    loading="lazy"
+                    decoding="async"
                   />
                   {/* Gradient overlay - no size display */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
@@ -144,8 +152,8 @@ const ThreeDSlider = ({
               key={index}
               onClick={() => goToSlide(index)}
               className={`w-2 h-2 transition-all duration-300 ${index === activeIndex
-                  ? 'bg-secondary w-6'
-                  : 'bg-muted-foreground/30 hover:bg-muted-foreground/50'
+                ? 'bg-secondary w-6'
+                : 'bg-muted-foreground/30 hover:bg-muted-foreground/50'
                 }`}
             />
           ))}
