@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ChevronLeft, ChevronRight, ArrowLeft, ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import PageTransition from '@/components/PageTransition';
+import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import ScrollToTop from '@/components/ScrollToTop';
 
 // Scroll to top on page load
 const useScrollToTop = () => {
@@ -175,29 +176,13 @@ const GalleryPage = () => {
     };
 
     return (
-        <PageTransition>
-            <div className="min-h-screen bg-background" dir={isRTL ? 'rtl' : 'ltr'}>
-                {/* Header */}
-                <header className="sticky top-0 z-40 bg-background/95 backdrop-blur-sm border-b border-border">
-                    <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-                        <Link
-                            to="/"
-                            className="flex items-center gap-2 text-muted-foreground hover:text-secondary transition-colors"
-                        >
-                            {isRTL ? <ArrowRight size={20} /> : <ArrowLeft size={20} />}
-                            <span>{isRTL ? 'العودة للرئيسية' : 'Back to Home'}</span>
-                        </Link>
-
-                        <h1 className="text-xl md:text-2xl font-bold text-foreground">
-                            {isRTL ? 'أعمالي' : 'My Works'}
-                        </h1>
-
-                        <div className="w-24" />
-                    </div>
-                </header>
-
-                {/* Gallery Grid */}
-                <main className="container mx-auto px-4 py-8 md:py-12">
+        <div className="min-h-screen bg-background transition-colors duration-300">
+            <Navbar />
+            <main className="pt-20">
+                <div className="container mx-auto px-4 py-8 md:py-12">
+                    <h1 className="text-3xl md:text-4xl font-bold text-foreground text-center mb-4">
+                        {isRTL ? 'جميع أعمالي' : 'All My Works'}
+                    </h1>
                     <p className="text-center text-muted-foreground mb-8 md:mb-12 max-w-2xl mx-auto">
                         {isRTL
                             ? 'مجموعة من أعمالي الفنية - اضغط على أي عمل لتكبيره'
@@ -214,22 +199,24 @@ const GalleryPage = () => {
                             />
                         ))}
                     </div>
-                </main>
+                </div>
+            </main>
+            <Footer />
+            <ScrollToTop />
 
-                {/* Lightbox */}
-                <AnimatePresence>
-                    {selectedImage && (
-                        <Lightbox
-                            image={selectedImage}
-                            images={galleryImages}
-                            onClose={() => setSelectedImage(null)}
-                            onNext={handleNext}
-                            onPrev={handlePrev}
-                        />
-                    )}
-                </AnimatePresence>
-            </div>
-        </PageTransition>
+            {/* Lightbox */}
+            <AnimatePresence>
+                {selectedImage && (
+                    <Lightbox
+                        image={selectedImage}
+                        images={galleryImages}
+                        onClose={() => setSelectedImage(null)}
+                        onNext={handleNext}
+                        onPrev={handlePrev}
+                    />
+                )}
+            </AnimatePresence>
+        </div>
     );
 };
 

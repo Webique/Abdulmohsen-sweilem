@@ -18,6 +18,7 @@ export interface Exhibition {
     en: string;
   };
   photos?: string[];
+  videos?: string[];
 }
 
 export interface SocialLink {
@@ -132,5 +133,24 @@ export const exhibitions: Exhibition[] = [
   { id: '13', year: '2019', title: { ar: 'معرض الفن المعاصر', en: 'Contemporary Art Exhibition' } },
   { id: '14', year: '2021', title: { ar: 'معرض افتراضي - كوفيد', en: 'Virtual Exhibition - COVID' } },
   { id: '15', year: '2023', title: { ar: 'معرض جسفت الكبير', en: 'JASFT Grand Exhibition' } },
-  { id: '16', year: '2025', title: { ar: 'ملتقى الزلفي ٢٠٢٥م', en: 'Al Zulfi Arts Gathering — 2025' } }
+  {
+    id: '16',
+    year: '2025',
+    title: { ar: 'ملتقى الزلفي ٢٠٢٥م', en: 'Al Zulfi Arts Gathering — 2025' },
+    photos: [
+      '/images/exhibitions/zulfi-01.jpg',
+      '/images/exhibitions/zulfi-02.jpg',
+      '/images/exhibitions/zulfi-03.jpg',
+      '/images/exhibitions/zulfi-04.jpg',
+      '/images/exhibitions/zulfi-05.jpg',
+      '/images/exhibitions/zulfi-06.jpg',
+      '/images/exhibitions/zulfi-07.jpg',
+      '/images/exhibitions/zulfi-08.jpg'
+    ],
+    videos: [
+      '/images/exhibitions/zulfi-video-01.mp4',
+      '/images/exhibitions/zulfi-video-02.mp4',
+      '/images/exhibitions/zulfi-video-03.mp4'
+    ]
+  }
 ];

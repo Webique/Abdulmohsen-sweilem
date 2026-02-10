@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import ThemeToggle from './ThemeToggle';
 import logo from '@/assets/logo.webp';
 
@@ -10,7 +11,7 @@ const navItems = [
   { key: 'biography', href: '#biography' },
   { key: 'works', href: '#works' },
   { key: 'collectedWorks', href: '#collected-works' },
-  { key: 'exhibitions', href: '#exhibitions' },
+  { key: 'exhibitions', href: '/exhibitions' },
   { key: 'photos', href: '#photos' },
   { key: 'contact', href: '#contact' },
 ];
@@ -36,10 +37,20 @@ const Navbar = () => {
     window.location.reload();
   };
 
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleNavClick = (href: string) => {
+    if (href.startsWith('/')) {
+      navigate(href);
+    } else if (location.pathname !== '/') {
+      // On a sub-page, navigate home first then scroll
+      navigate('/' + href);
+    } else {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
     setIsMobileMenuOpen(false);
   };
@@ -58,7 +69,7 @@ const Navbar = () => {
             href="#home"
             onClick={(e) => {
               e.preventDefault();
-              scrollToSection('#home');
+              handleNavClick('#home');
             }}
             className="flex items-center gap-2 shrink-0"
             whileHover={{ scale: 1.02 }}
@@ -90,7 +101,7 @@ const Navbar = () => {
                 href={item.href}
                 onClick={(e) => {
                   e.preventDefault();
-                  scrollToSection(item.href);
+                  handleNavClick(item.href);
                 }}
                 className="px-3 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors rounded-lg hover:bg-muted/50"
                 whileHover={{ y: -1 }}
@@ -141,7 +152,7 @@ const Navbar = () => {
                   href={item.href}
                   onClick={(e) => {
                     e.preventDefault();
-                    scrollToSection(item.href);
+                    handleNavClick(item.href);
                   }}
                   initial={{ opacity: 0, x: isRTL ? 20 : -20 }}
                   animate={{ opacity: 1, x: 0 }}
