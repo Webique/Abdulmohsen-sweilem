@@ -145,10 +145,10 @@ const resources = {
       nav: {
         home: "Home",
         biography: "Biography",
-        works: "Works",
+        works: "My Works",
         collectedWorks: "Collected Works",
-        exhibitions: "Exhibitions",
-        photos: "Photos",
+        exhibitions: "Participations & Exhibitions",
+        photos: "Personal Photos",
         contact: "Contact"
       },
       hero: {

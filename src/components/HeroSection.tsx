@@ -159,6 +159,36 @@ const HeroSection = () => {
                 </motion.button>
               </motion.div>
 
+              {/* Section navigation links */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 1.1 }}
+                className="mt-8"
+              >
+                <div className="flex flex-wrap gap-x-6 gap-y-3 justify-center md:justify-start">
+                  {[
+                    { label: t('nav.biography'), href: '#biography' },
+                    { label: t('nav.collectedWorks'), href: '#collected-works' },
+                    { label: t('nav.exhibitions'), href: '#exhibitions' },
+                    { label: t('nav.photos'), href: '#photos' },
+                  ].map((item, index) => (
+                    <motion.button
+                      key={item.href}
+                      onClick={() => scrollToSection(item.href)}
+                      className="group relative text-sm md:text-base text-muted-foreground hover:text-secondary transition-colors duration-300 pb-1"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 1.2 + index * 0.1 }}
+                      whileHover={{ y: -2 }}
+                    >
+                      {item.label}
+                      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-secondary transition-all duration-300 group-hover:w-full" />
+                    </motion.button>
+                  ))}
+                </div>
+              </motion.div>
+
               {/* Social links */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}

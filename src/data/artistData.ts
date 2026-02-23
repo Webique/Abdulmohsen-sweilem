@@ -130,13 +130,48 @@ export const exhibitions: Exhibition[] = [
       '/images/exhibitions/misk-riyadh-04.webp'
     ]
   },
-  { id: '13', year: '2019', title: { ar: 'معرض الفن المعاصر', en: 'Contemporary Art Exhibition' } },
-  { id: '14', year: '2021', title: { ar: 'معرض افتراضي - كوفيد', en: 'Virtual Exhibition - COVID' } },
-  { id: '15', year: '2023', title: { ar: 'معرض جسفت الكبير', en: 'JASFT Grand Exhibition' } },
+  {
+    id: '13',
+    year: '2018',
+    title: { ar: 'معرض الملتقى الرابع - مركز الملك فهد الثقافي', en: 'Fourth Forum Exhibition - King Fahd Cultural Center' },
+    photos: [
+      '/images/exhibitions/kingfhd-01.jpg',
+      '/images/exhibitions/kingfhd-02.jpg'
+    ]
+  },
+  { id: '14', year: '2019', title: { ar: 'معرض الفن المعاصر', en: 'Contemporary Art Exhibition' } },
+  {
+    id: '15',
+    year: '2019',
+    title: { ar: 'ملتقى النخبة التشكيلي بحائل', en: 'Elite Visual Arts Forum - Hail' },
+    photos: [
+      '/images/exhibitions/hael-01.jpg',
+      '/images/exhibitions/hael-02.jpg',
+      '/images/exhibitions/hael-03.jpg',
+      '/images/exhibitions/hael-04.jpg',
+      '/images/exhibitions/hael-05.jpg',
+      '/images/exhibitions/hael-06.jpg',
+      '/images/exhibitions/hael-07.jpg',
+      '/images/exhibitions/hael-08.jpg'
+    ]
+  },
   {
     id: '16',
+    year: '2020',
+    title: { ar: 'ورشة الملتقى التشكيلي بعقرباء', en: 'Al-Aqrabaa Visual Arts Workshop' },
+    photos: [
+      '/images/exhibitions/3qrba-01.jpg',
+      '/images/exhibitions/3qrba-02.jpg',
+      '/images/exhibitions/3qrba-03.jpg',
+      '/images/exhibitions/3qrba-04.jpg'
+    ]
+  },
+  { id: '17', year: '2021', title: { ar: 'معرض افتراضي - كوفيد', en: 'Virtual Exhibition - COVID' } },
+  { id: '18', year: '2023', title: { ar: 'معرض جسفت الكبير', en: 'JASFT Grand Exhibition' } },
+  {
+    id: '19',
     year: '2025',
-    title: { ar: 'ملتقى الزلفي ٢٠٢٥م', en: 'Al Zulfi Arts Gathering — 2025' },
+    title: { ar: 'ملتقى الزلفي', en: 'Al Zulfi Arts Gathering' },
     photos: [
       '/images/exhibitions/zulfi-01.jpg',
       '/images/exhibitions/zulfi-02.jpg',
